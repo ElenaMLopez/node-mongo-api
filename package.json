@@ -1,9 +1,20 @@
 {
   "name": "node-mongo-api",
   "version": "1.0.0",
+  "configurations": [
+    {
+      "type": "node",
+      "request": "attach",
+      "name": "Node: Nodemon",
+      "processId": "${command:PickProcess}",
+      "restart": true,
+      "protocol": "inspector"
+    }
+  ],
   "description": "Api with NodeJs and MongoDB",
   "main": "index.js",
   "scripts": {
+    "debug": "nodemon --inspect app/app.js",
     "dev": "nodemon server.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
