@@ -44,12 +44,12 @@ function update(req, res) {
 function remove(req, res) {
   if (req.body.error) return res.status(500).send(error);
   if (!req.body.products) return res.status(404).send({ message: "Producto no encontrado, no puede eliminarse" });
-  req.products[0]
+  req.body.products[0]
     .remove()
     .then((product) =>
-      res.status(200).send({ message: "Producto eliminado", producto })
+      res.status(200).send({ message: "Producto eliminado", product })
     )
-    .catch((error) => res.status(500).send({ error }));
+    .catch((error) => res.status(500).send({ error: error, message: 'Error eliminando el producto'}));
 }
 
 function find(req,res,next){
