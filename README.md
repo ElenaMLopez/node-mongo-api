@@ -19,3 +19,6 @@ I used a Dockerhub MongoDb image and start a MongoDb database:
 Start server:
 
 ```npm run dev```
+
+Use Postman, PostWoman, Imsomnia or similar to make the basic CRUD.
+
