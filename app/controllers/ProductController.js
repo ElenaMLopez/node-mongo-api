@@ -1,4 +1,4 @@
-const Product = require("../modelos/Product");
+const Product = require("../models/Product");
 
 /**
  * When client access to any route, here we define
@@ -16,20 +16,21 @@ function index(req, res) {
 
 function show(req, res) {
   if (req.body.error) return res.status(500).send(error);
-  if (req.body.products) return res.status(200).send({ products });
+  if (req.body.products) return res.status(200).send( req.body.products );
   return res.status(400)
-    .send({ message: "Not found" });
+    .send({ message: "No encontrado" });
 }
 
 function create(req, res) {
   new Product(req.body)
     .save()
     .then((product) => res.status(201).send({ product }))
-    .catch((error) => res.status(500).send({ error }));
+    .catch((error) => {
+      res.status(500).send({ message: req.body, message2: error })});
 }
 
 function update(req, res) {
-  if (!req.body.products) return res.status(404).send({ message: "No encontrado" });
+  if (!req.body.products) return res.status(204).send({ message: "No encontrado" });
   let product = req.body.products[0];
   product = Object.assign(product, req.body); // Create a new object with new data
   product
